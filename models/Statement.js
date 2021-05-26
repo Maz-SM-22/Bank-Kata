@@ -1,3 +1,13 @@
 //date = 24/05/2021
 //amount = 12.3
-//balance = 1012.3 (total of money after the amount)
+// balance = 1012.3 (total of money after the amount)
+
+class Statement {
+    constructor(amount, balance) {
+        this.date = new Date(),
+        this.amount = amount,
+        this.balance = balance
+    }
+}
+
+module.exports = Statement; 
