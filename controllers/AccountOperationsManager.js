@@ -1,5 +1,3 @@
-// Business logic related to the account
-
 const Account = require('../models/Account'); 
 const Client = require('../models/Client'); 
 const ContactInfo = require('../models/ContactInfo'); 
@@ -24,12 +22,15 @@ exports.withdrawal = (req, res, next) => {
 
 exports.deposit = (req, res, next) => {
     if (fakeAccount.accountId!==req.body.accountId) {
-        next(new Error(`Account with id: ${accountId} does not exist`));
+        next(new Error(`Account with id: ${req.body.accountId} does not exist`));
     }
     fakeAccount.balance += req.body.amount;
     fakeAccount.statements.push(new Statement(req.body.amount, fakeAccount.balance));
 }
 
 exports.close = (req, res) => {
-    
+    if (fakeAccount.accountId!==req.body.accountId) {
+        next(new Error(`Account with id: ${req.body.accountId} does not exist`))
+    }
+    delete fakeAccount; 
 }
